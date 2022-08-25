@@ -1,0 +1,10 @@
+{
+  "domain": "customised_weather",
+  "name": "Customised Weather",
+  "version": 0.01,
+  "documentation": "https://www.example.com",
+  "dependencies": ["weather"],
+  "codeowners": ["@WhyTey"],
+  "requirements": [],
+  "iot_class": "calculated"
+}
