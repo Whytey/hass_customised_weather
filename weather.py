@@ -47,18 +47,17 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     temperature = config.get("temperature")
 
     add_entities([CustomisedWeather(
-        name, condition, temperature, hass.config.units.temperature_unit, hass)], True)
+        name, condition, temperature, hass)], True)
 
 
 class CustomisedWeather(WeatherEntity):
     """Implementation of CustomisedWeather WeatherEntity"""
 
-    def __init__(self, name, condition, temperature, temperature_unit, hass):
+    def __init__(self, name, condition, temperature, hass):
         """Initialize the sensor."""
         self._name = name
         self._condition = condition
         self._temperature = temperature
-        self._temperature_unit = temperature_unit
         self._hass = hass
         self.data = None
         self.forecast_data = None
@@ -77,7 +76,7 @@ class CustomisedWeather(WeatherEntity):
             return None
 
     @property
-    def temperature(self):
+    def native_temperature(self):
         """Return the temperature."""
         try:
             return float(self._hass.states.get(self._temperature).state)
@@ -85,17 +84,6 @@ class CustomisedWeather(WeatherEntity):
             return None
 
     @property
-    def temperature_unit(self):
-        """Return the unit of measurement."""
-        return TEMP_CELSIUS
-
-    @property
     def humidity(self):
         """Return the humidity."""
         return 80
-
-    def update(self):
-        """Get the latest data from entities and updates the states."""
-        pass
-
-
